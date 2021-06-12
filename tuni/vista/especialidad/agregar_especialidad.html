@@ -1,0 +1,48 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+	<title>Formulario para agregar especialidad</title>
+</head>
+<body>
+	<form method="POST" action="guardar_esp.php" name="form_esp" id="form_esp" onsubmit="return validacion();">
+		<center><h1 class="bb">INGRESE SU ESPECIALIDAD</h1></center>
+		<center><table align="center" class="table">
+			<tr align="center">
+				<td colspan="2" id="encabezado">Agregar Especialidad</td>
+			</tr>
+			<tr>
+				<td align="right">Nombre de la Especialidad</td>
+				<td><input type="text" id="descripcion" name="descripcion" size="60" maxlength="50" placeholder="Ingrese el nombre" onblur="soloMayusculas('descripcion')"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="btnEnviar" id="btnEnviar" value="Guardar" class="boton-submit">
+					<input type="reset" name="btnLimpiar" id="btnLimpiar" value="Limpiar" class="boton-cancel">
+				</td>
+			</tr>
+		</table></center>
+	</form>
+</body>
+</html>
+<script type="text/javascript">
+function soloMayusculas(campo_id) 
+{
+	var cadena = document.getElementById(campo_id).value;
+	var cadena2 = cadena.toUpperCase();
+	document.getElementById(campo_id).value = cadena2;
+}
+
+function validacion()
+{
+	valor1 = document.getElementById("descripcion").value;
+	if (valor1 == null || valor1.length == 0) 
+	{			    
+	    alert('[ERROR] El campo descripcion no debe estar vacío');
+	    document.getElementById("descripcion").style.border='1px solid red';
+	    document.getElementById("descripcion").focus();
+	    return false;
+	}
+	return true;
+}
+</script>

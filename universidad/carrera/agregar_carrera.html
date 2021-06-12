@@ -1,0 +1,80 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos_form.css">
+	<title>Formulario para agregar carrera</title>
+</head>
+<body>
+	<form method="POST" action="guardar_car.php" name="form_car" id="form_car" onsubmit="return revisa_form('form_car');">
+		<center><h1 class="bb">INGRESE SU CARRERA</h1></center>
+		<center><table align="center" class="table">
+			<tr align="center">
+				<td colspan="2" id="encabezado">Agregar Carrera</td>
+			</tr>
+			<tr>
+				<td align="right">Nombre de la Carrera</td>
+				<td><input type="text" id="descripcion" name="descripcion" size="60" maxlength="50" placeholder="Ingrese el nombre" onblur="soloMayusculas('descripcion')"></td>
+			</tr>
+			<tr>
+				<td align="right">Unidades Crédito</td>
+				<td><input type="text" id="unicred" name="unicred" size="20" maxlength="3" placeholder="999" onkeypress="return SoloNumeros(event)"></td>
+			</tr>
+			<tr>
+				<td align="right">Letra</td>
+				<td><input type="text" id="letra" name="letra" size="20" maxlength="1" placeholder="A" onblur="soloMayusculas('letra')"></td>
+			</tr>
+			<tr>
+				<td align="right">Trayectos</td>
+				<td><input type="text" id="trayectos" name="trayectos" size="20" maxlength="1" placeholder="9" onkeypress="return SoloNumeros(event)"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="btnEnviar" id="btnEnviar" value="Guardar" class="boton-submit">
+					<input type="reset" name="btnLimpiar" id="btnLimpiar" value="Limpiar" class="boton-cancel">
+				</td>
+			</tr>
+		</table></center>
+	</form>
+</body>
+</html>
+<script type="text/javascript">
+function soloMayusculas(campo_id) 
+{
+	var cadena = document.getElementById(campo_id).value;
+	var cadena2 = cadena.toUpperCase();
+	document.getElementById(campo_id).value = cadena2;
+}
+
+function SoloNumeros(evt) // solo permite insertar NUMEROS,EL PUNTO, ENTER, ESPACIO
+{
+	var nav4 = window.Event ? true : false;
+	// NOTE: Backspace = 8, Enter = 13, '0' = 48, '9' = 57, '.' = 46
+	var key = nav4 ? evt.which : evt.keyCode;
+	return (key <= 13 || (key >= 48 && key <= 57));
+}
+
+function revisa_form(form_id) 
+{
+	//Con esta función revisamos los elementos del formulario que se pasa por parámetro
+	var formulario = document.getElementById(form_id);	
+	var valido = true;
+    for (var j=0; j<formulario.elements.length; j++)
+    {
+        elemento=formulario.elements[j];
+        if (elemento.className != 'no_requerido') //Para diferenciar los campos no requeridos en el formulario
+        {
+	        valor = formulario.elements[j].value;
+	        if (valor == null || valor.length == 0)
+	        {
+	        	alert('[ERROR] El campo '+ formulario.elements[j].name +' no debe estar vací­o');
+	        	formulario.elements[j].style.border='1px solid red';
+	        	formulario.elements[j].focus();
+	        	valido = false;
+	        	break;
+	        }
+    	}
+    }
+	return valido;
+}
+</script>
